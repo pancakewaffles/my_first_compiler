@@ -1,0 +1,28 @@
+### Starting build.
+# Target: toy.ml.depends, tags: { extension:ml, file:toy.ml, ocaml, ocamldep, quiet, traverse }
+/usr/bin/ocamldep.opt -modules toy.ml > toy.ml.depends
+# Target: lexer.ml.depends, tags: { pp(camlp4of), extension:ml, file:lexer.ml, ocaml, ocamldep, quiet, traverse, use_camlp4 }
+/usr/bin/ocamldep.opt -pp camlp4of -modules lexer.ml > lexer.ml.depends # cached
+# Target: token.ml.depends, tags: { extension:ml, file:token.ml, ocaml, ocamldep, quiet, traverse }
+/usr/bin/ocamldep.opt -modules token.ml > token.ml.depends # cached
+# Target: token.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:token.cmo, file:token.ml, implem, ocaml, quiet, traverse }
+/usr/bin/ocamlc.opt -c -o token.cmo token.ml # cached
+# Target: lexer.cmo, tags: { pp(camlp4of), byte, compile, extension:cmo, extension:ml, file:lexer.cmo, file:lexer.ml, implem, ocaml, quiet, traverse, use_camlp4 }
+/usr/bin/ocamlc.opt -c -I /usr/lib/ocaml/camlp4 -pp camlp4of -o lexer.cmo lexer.ml # cached
+# Target: parser.ml.depends, tags: { pp(camlp4of), extension:ml, file:parser.ml, ocaml, ocamldep, quiet, traverse, use_camlp4 }
+/usr/bin/ocamldep.opt -pp camlp4of -modules parser.ml > parser.ml.depends # cached
+# Target: ast.ml.depends, tags: { extension:ml, file:ast.ml, ocaml, ocamldep, quiet, traverse }
+/usr/bin/ocamldep.opt -modules ast.ml > ast.ml.depends # cached
+# Target: ast.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:ast.cmo, file:ast.ml, implem, ocaml, quiet, traverse }
+/usr/bin/ocamlc.opt -c -o ast.cmo ast.ml # cached
+# Target: parser.cmo, tags: { pp(camlp4of), byte, compile, extension:cmo, extension:ml, file:parser.cmo, file:parser.ml, implem, ocaml, quiet, traverse, use_camlp4 }
+/usr/bin/ocamlc.opt -c -I /usr/lib/ocaml/camlp4 -pp camlp4of -o parser.cmo parser.ml # cached
+# Target: test.ml.depends, tags: { extension:ml, file:test.ml, ocaml, ocamldep, quiet, traverse }
+/usr/bin/ocamldep.opt -modules test.ml > test.ml.depends # cached
+# Target: test.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:test.cmo, file:test.ml, implem, ocaml, quiet, traverse }
+/usr/bin/ocamlc.opt -c -o test.cmo test.ml
+# Target: toy.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:toy.cmo, file:toy.ml, implem, ocaml, quiet, traverse }
+/usr/bin/ocamlc.opt -c -o toy.cmo toy.ml
+# Target: toy.byte, tags: { byte, dont_link_with, extension:byte, file:toy.byte, link, ocaml, program, quiet, traverse }
+/usr/bin/ocamlc.opt token.cmo lexer.cmo ast.cmo parser.cmo test.cmo toy.cmo -o toy.byte
+# Compilation successful.
